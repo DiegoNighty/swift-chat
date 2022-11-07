@@ -1,7 +1,6 @@
 package dev.diegonighty.swiftchat.core.structure.decorator.chain;
 
 import dev.diegonighty.swiftchat.core.annotation.Annotations;
-import dev.diegonighty.swiftchat.core.structure.ChannelInformation;
 import dev.diegonighty.swiftchat.core.structure.decorator.ChannelDecorator;
 import dev.diegonighty.swiftchat.core.structure.decorator.DecoratorPriority;
 import dev.diegonighty.swiftchat.core.structure.decorator.annotation.Decorator;
@@ -28,16 +27,14 @@ public class MarkedChannelDecoratorChain implements ChannelDecoratorChain {
     }
 
     @Override
-    public void decorate(MessageContext ctx) {
-        ChannelInformation channel = ctx.channel();
+    public List<ChannelDecorator> decorate(MessageContext ctx) {
+        var channel = ctx.channel();
 
-        List<ChannelDecorator> decorators = channel.decorators()
+        return channel.decorators()
                 .stream()
                 .sorted(Comparator.comparingInt(EXTRACTOR))
                 .map(decoratorNamespace::using)
                 .toList();
-
-        decorators.forEach(decorator -> decorator.decorate(ctx));
     }
 
 }
