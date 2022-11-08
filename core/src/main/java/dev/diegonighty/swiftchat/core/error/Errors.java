@@ -10,5 +10,13 @@ public class Errors {
         }
     }
 
+    public static <E extends RuntimeException> void expectsNonNull(
+            Object nullable, E exception
+    ) throws E {
+        if (nullable == null) {
+            throw exception;
+        }
+    }
+
 
 }
