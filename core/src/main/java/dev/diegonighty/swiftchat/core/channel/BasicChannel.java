@@ -2,14 +2,12 @@ package dev.diegonighty.swiftchat.core.channel;
 
 import dev.diegonighty.swiftchat.core.structure.channel.Channel;
 import dev.diegonighty.swiftchat.core.structure.channel.ChannelInformation;
-import dev.diegonighty.swiftchat.core.structure.channel.ChannelMetadata;
-import dev.diegonighty.swiftchat.core.structure.decorator.sequence.DecoratorChainSequence;
 import dev.diegonighty.swiftchat.core.structure.decorator.chain.factory.DecoratorChainFactory;
+import dev.diegonighty.swiftchat.core.structure.decorator.sequence.DecoratorChainSequence;
 import dev.diegonighty.swiftchat.core.structure.message.MessageContext;
 
 public record BasicChannel(
         ChannelInformation information,
-        ChannelMetadata metadata,
         DecoratorChainFactory chainFactory,
         DecoratorChainSequence sequence
 ) implements Channel {

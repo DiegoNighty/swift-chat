@@ -3,7 +3,6 @@ package dev.diegonighty.swiftchat.spigot.message;
 import dev.diegonighty.swiftchat.core.common.Metadata;
 import dev.diegonighty.swiftchat.core.structure.channel.Channel;
 import dev.diegonighty.swiftchat.core.structure.channel.ChannelInformation;
-import dev.diegonighty.swiftchat.core.structure.channel.ChannelMetadata;
 import dev.diegonighty.swiftchat.core.structure.message.Message;
 import dev.diegonighty.swiftchat.core.structure.message.MessageContext;
 
@@ -25,7 +24,7 @@ public class SimpleMessageContext implements MessageContext {
     }
 
     @Override
-    public ChannelMetadata channelMetadata() {
+    public Metadata channelMetadata() {
         return channel.metadata();
     }
 

@@ -11,11 +11,6 @@ public class RadialChannelDecorator implements ChannelDecorator {
     @Override
     public ChannelDecoratorChain decorate(ChannelDecoratorChain chain) {
         return chain
-                .decorate((ctx, recipient) -> {
-                    Player sender = StructureAdapter.adapt(ctx.message().sender());
-                    ctx.metadata()
-                            .set();
-                })
                 .permit((ctx, recipient) -> {
                     Player sender = StructureAdapter.adapt(ctx.message().sender());
                     Player receiver = StructureAdapter.adapt(recipient);
@@ -24,8 +19,7 @@ public class RadialChannelDecorator implements ChannelDecorator {
                         return false;
                     }
 
-                    int radius = ctx.channelMetadata()
-                            .meta()
+                    int radius = ctx.channel().metadata()
                             .asInt("options.chat.radius");
 
                     return sender.getLocation()

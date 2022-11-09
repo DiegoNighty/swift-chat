@@ -6,8 +6,6 @@ public interface Channel {
 
     ChannelInformation information();
 
-    ChannelMetadata metadata();
-
     void postMessage(MessageContext ctx);
 
 }

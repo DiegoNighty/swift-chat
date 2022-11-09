@@ -28,7 +28,10 @@ public class StructureAdapter {
                 .channel()
                 .getChannel(event.getPlayer());
 
-        return new SimpleMessageContext(channel, new Message(event.getMessage(), event.getMessage(), new PlayerRecipient(event.getPlayer(), new FlatMessageRenderer())));
+        return new SimpleMessageContext(
+                channel,
+                new Message(event.getMessage(), event.getFormat(), new PlayerRecipient(event.getPlayer(), new FlatMessageRenderer()))
+        );
     }
 
 }

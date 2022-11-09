@@ -1,19 +1,23 @@
 package dev.diegonighty.swiftchat.spigot.message;
 
+import dev.diegonighty.swiftchat.core.structure.message.Message;
 import dev.diegonighty.swiftchat.core.structure.message.MessageContext;
-import dev.diegonighty.swiftchat.core.structure.message.MessageRender;
-import org.bukkit.Bukkit;
+import dev.diegonighty.swiftchat.core.structure.message.MessageRenderer;
+import dev.diegonighty.swiftchat.core.structure.recipient.ChannelRecipient;
+import dev.diegonighty.swiftchat.spigot.StructureAdapter;
 import org.bukkit.entity.Player;
 
-import java.util.UUID;
-
-public class FlatMessageRenderer implements MessageRender {
+public class FlatMessageRenderer implements MessageRenderer {
 
     @Override
-    public void render(MessageContext ctx) {
-        Player player = Bukkit.getPlayer(UUID.fromString(ctx.message().sender().id()));
-        if (player == null) return;
+    public void render(ChannelRecipient listener, MessageContext ctx) {
+        Player listenerPlayer = StructureAdapter.adapt(listener);
+        Message message = ctx.message();
 
-        player.sendMessage(ctx.message().content().toString());
+        listenerPlayer.sendMessage(
+                message.format()
+                        .append(message.content())
+                        .toString()
+        );
     }
 }

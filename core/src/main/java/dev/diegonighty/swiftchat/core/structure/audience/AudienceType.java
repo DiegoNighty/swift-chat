@@ -1,8 +1,9 @@
 package dev.diegonighty.swiftchat.core.structure.audience;
 
-public enum AudienceType {
+public record AudienceType(String type) {
 
-    SERIALIZABLE,
-    NAMESPACED
+    public static final AudienceType SERIALIZABLE_GROUP = new AudienceType("SERIALIZABLE_GROUP");
+    public static final AudienceType GROUP = new AudienceType("GROUP");
+    public static final AudienceType GLOBAL = new AudienceType("GLOBAL");
 
 }

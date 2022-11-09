@@ -1,4 +1,5 @@
 rootProject.name = 'SwiftChat'
 include 'core'
 include 'spigot'
+include 'mongo'
 
