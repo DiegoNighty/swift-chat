@@ -20,13 +20,9 @@ public interface GenericReader<Data> {
 
     <T> List<T> readList(String field, Class<T> clazz);
 
-    <T> List<Class<? extends T>> readClazzList(String field, Class<T> clazz);
-
     <T> T readChild(
             String field,
             Function<GenericReader<Data>, T> parser
     );
-
-
 
 }

@@ -6,6 +6,8 @@ import com.mongodb.client.model.ReplaceOptions;
 import dev.diegonighty.swiftchat.core.storage.serializer.GenericSerializer;
 import org.bson.Document;
 
+import java.util.function.Consumer;
+
 public class MongoGenericRepository<K, V extends GenericStorable<K>> implements GenericRepository<K, V> {
 
     protected final static ReplaceOptions REPLACE_OPTIONS = new ReplaceOptions()
@@ -42,7 +44,7 @@ public class MongoGenericRepository<K, V extends GenericStorable<K>> implements 
     }
 
     public V findByFieldValue(String key, Object value) {
-        Document document = collection
+        var document = collection
                 .find(Filters.eq(key, value))
                 .first();
 
@@ -53,4 +55,15 @@ public class MongoGenericRepository<K, V extends GenericStorable<K>> implements 
         return serializer.read(document);
     }
 
+    @Override
+    public void modify(K key, Consumer<V> action) {
+        var value = find(key);
+
+        if (value == null) {
+            return;
+        }
+
+        action.accept(value);
+        save(value);
+    }
 }

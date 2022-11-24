@@ -1,32 +1,30 @@
 package dev.diegonighty.swiftchat.core;
 
-import dev.diegonighty.swiftchat.core.container.ChannelContainer;
+import dev.diegonighty.swiftchat.core.channel.ChannelFactory;
+import dev.diegonighty.swiftchat.core.channel.ChannelManager;
 import dev.diegonighty.swiftchat.core.error.platform.PlatformAlreadyEnabledError;
 import dev.diegonighty.swiftchat.core.recipient.RecipientAdapter;
+import dev.diegonighty.swiftchat.core.storage.channel.ChannelRepository;
 import dev.diegonighty.swiftchat.core.structure.audience.AudienceAdapter;
 import dev.diegonighty.swiftchat.core.structure.decorator.namespace.DecoratorNamespace;
+import dev.diegonighty.swiftchat.core.structure.message.MessageRendererProvider;
 
 public interface ChatPlatform {
 
     void enable() throws PlatformAlreadyEnabledError;
 
-    Namespaces namespace();
+    MessageRendererProvider messageRenderer();
 
-    Containers container();
+    AudienceAdapter audienceAdapter();
 
-    Adapters adapter();
+    RecipientAdapter recipientAdapter();
 
-    record Adapters(
-       RecipientAdapter recipient,
-       AudienceAdapter audience
-    ) {}
+    DecoratorNamespace decoratorNamespace();
 
-    record Namespaces(
-            DecoratorNamespace decorator
-    ) {}
+    ChannelManager channelManager();
 
-    record Containers(
-            ChannelContainer channel
-    ) {}
+    ChannelFactory channelFactory();
+
+    ChannelRepository channelRepository();
 
 }

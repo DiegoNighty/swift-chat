@@ -16,7 +16,7 @@ public class UUIDRecipientAdapter implements RecipientAdapter {
 
     @Override
     public ChannelRecipient adapt(Object adapt) {
-        UUID id = (UUID) adapt;
+        var id = (UUID) adapt;
 
         return recipientAdapter.adapt(Bukkit.getPlayer(id));
     }

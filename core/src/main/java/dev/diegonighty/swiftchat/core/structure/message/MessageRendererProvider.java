@@ -1,6 +1,4 @@
-package dev.diegonighty.swiftchat.spigot.message;
-
-import dev.diegonighty.swiftchat.core.structure.message.MessageRenderer;
+package dev.diegonighty.swiftchat.core.structure.message;
 
 public class MessageRendererProvider {
 

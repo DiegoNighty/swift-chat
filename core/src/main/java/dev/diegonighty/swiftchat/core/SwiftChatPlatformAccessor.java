@@ -14,7 +14,7 @@ public class SwiftChatPlatformAccessor {
     public static synchronized ChatPlatform access() {
         Errors.expectsNonNull(
                 platform,
-                new IllegalStateException("The platform is not initialized yet")
+                () -> new IllegalStateException("The platform is not initialized yet")
         );
 
         return platform;

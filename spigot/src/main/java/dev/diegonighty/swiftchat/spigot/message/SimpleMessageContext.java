@@ -8,7 +8,7 @@ import dev.diegonighty.swiftchat.core.structure.message.MessageContext;
 
 public class SimpleMessageContext implements MessageContext {
 
-    private final Metadata metadata = new Metadata();
+    private final Metadata metadata = Metadata.empty();
     private final Message message;
 
     private final Channel channel;
@@ -21,11 +21,6 @@ public class SimpleMessageContext implements MessageContext {
     @Override
     public ChannelInformation channel() {
         return channel.information();
-    }
-
-    @Override
-    public Metadata channelMetadata() {
-        return channel.metadata();
     }
 
     @Override

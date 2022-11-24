@@ -4,7 +4,6 @@ import dev.diegonighty.swiftchat.core.structure.decorator.ChannelDecorator;
 import dev.diegonighty.swiftchat.core.structure.decorator.DecoratorPriority;
 import dev.diegonighty.swiftchat.core.structure.decorator.chain.ChannelDecoratorChain;
 import dev.diegonighty.swiftchat.spigot.StructureAdapter;
-import org.bukkit.entity.Player;
 
 public class RadialChannelDecorator implements ChannelDecorator {
 
@@ -12,14 +11,14 @@ public class RadialChannelDecorator implements ChannelDecorator {
     public ChannelDecoratorChain decorate(ChannelDecoratorChain chain) {
         return chain
                 .permit((ctx, recipient) -> {
-                    Player sender = StructureAdapter.adapt(ctx.message().sender());
-                    Player receiver = StructureAdapter.adapt(recipient);
+                    var sender = StructureAdapter.adapt(ctx.message().sender());
+                    var receiver = StructureAdapter.adapt(recipient);
 
                     if (!sender.getWorld().getName().equals(receiver.getWorld().getName())) {
                         return false;
                     }
 
-                    int radius = ctx.channel().metadata()
+                    var radius = ctx.channel().metadata()
                             .asInt("options.chat.radius");
 
                     return sender.getLocation()
@@ -27,6 +26,5 @@ public class RadialChannelDecorator implements ChannelDecorator {
                             <= radius;
                 }, DecoratorPriority.LOW);
     }
-
 
 }

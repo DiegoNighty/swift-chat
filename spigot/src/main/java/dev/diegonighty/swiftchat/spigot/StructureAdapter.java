@@ -1,14 +1,11 @@
 package dev.diegonighty.swiftchat.spigot;
 
-import dev.diegonighty.swiftchat.core.ChatPlatform;
 import dev.diegonighty.swiftchat.core.SwiftChatPlatformAccessor;
 import dev.diegonighty.swiftchat.core.structure.channel.Channel;
 import dev.diegonighty.swiftchat.core.structure.message.Message;
 import dev.diegonighty.swiftchat.core.structure.message.MessageContext;
 import dev.diegonighty.swiftchat.core.structure.recipient.ChannelRecipient;
-import dev.diegonighty.swiftchat.spigot.message.FlatMessageRenderer;
 import dev.diegonighty.swiftchat.spigot.message.SimpleMessageContext;
-import dev.diegonighty.swiftchat.spigot.recipient.PlayerRecipient;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -21,16 +18,17 @@ public class StructureAdapter {
         return Bukkit.getPlayer(UUID.fromString(recipient.id()));
     }
 
-    public static MessageContext adapt(AsyncPlayerChatEvent event) {
-        ChatPlatform platform = SwiftChatPlatformAccessor.access();
-
-        Channel channel = platform.container()
-                .channel()
-                .getChannel(event.getPlayer());
+    public static MessageContext adapt(AsyncPlayerChatEvent event, Channel channel) {
+        var platform = SwiftChatPlatformAccessor.access();
 
         return new SimpleMessageContext(
                 channel,
-                new Message(event.getMessage(), event.getFormat(), new PlayerRecipient(event.getPlayer(), new FlatMessageRenderer()))
+                new Message(
+                        event.getMessage(),
+                        event.getFormat(),
+                        platform.recipientAdapter()
+                                .adapt(event.getPlayer())
+                )
         );
     }
 

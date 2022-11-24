@@ -2,7 +2,6 @@ package dev.diegonighty.swiftchat.core.storage.serializer;
 
 import org.bson.Document;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
@@ -51,28 +50,8 @@ public class DocumentReader implements GenericReader<Document> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T> List<Class<? extends T>> readClazzList(String field, Class<T> entity) {
-        List<String> query = document.getList(field, String.class);
-        List<Class<? extends T>> classes = new ArrayList<>();
-
-        for (String className : query) {
-            try {
-                Class<?> unknown = Class.forName(className);
-                if (entity.isAssignableFrom(unknown)) {
-                    classes.add((Class<? extends T>) unknown);
-                }
-            } catch (ClassNotFoundException e) {
-                new Exception("Error while deserializing unknown class by " + className).printStackTrace();
-            }
-        }
-
-        return classes;
-    }
-
-    @Override
     public <T> T readChild(String field, Function<GenericReader<Document>, T> parser) {
-        Document child = document.get(field, Document.class);
+        var child = document.get(field, Document.class);
 
         if (child == null) {
             return null;

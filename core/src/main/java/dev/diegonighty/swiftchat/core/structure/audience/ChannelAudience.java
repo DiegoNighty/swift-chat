@@ -10,4 +10,12 @@ public interface ChannelAudience {
 
     Collection<ChannelRecipient> recipients();
 
+    default boolean persistent() {
+        return false;
+    }
+
+    default String field() {
+        return null;
+    }
+
 }
