@@ -1,4 +1,4 @@
 rootProject.name = 'SwiftChat'
 
-include("api", "core", "spigot", "plugin")
+include("api", "core")
 
