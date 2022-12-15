@@ -1,11 +1,11 @@
 package dev.diegonighty.swiftchat.spigot.audience;
 
+import dev.diegonighty.swiftchat.core.audience.AudienceFactory;
+import dev.diegonighty.swiftchat.core.audience.AudienceType;
+import dev.diegonighty.swiftchat.core.audience.ChannelAudience;
+import dev.diegonighty.swiftchat.core.configuration.Configuration;
+import dev.diegonighty.swiftchat.core.recipient.ChannelRecipient;
 import dev.diegonighty.swiftchat.core.recipient.RecipientAdapter;
-import dev.diegonighty.swiftchat.core.storage.serializer.GenericReader;
-import dev.diegonighty.swiftchat.core.structure.audience.AudienceFactory;
-import dev.diegonighty.swiftchat.core.structure.audience.AudienceType;
-import dev.diegonighty.swiftchat.core.structure.audience.ChannelAudience;
-import dev.diegonighty.swiftchat.core.structure.recipient.ChannelRecipient;
 
 import java.util.Collection;
 import java.util.List;
@@ -46,8 +46,8 @@ public record GroupAudience(List<UUID> audience, RecipientAdapter adapter) imple
         }
 
         @Override
-        public ChannelAudience create(AudienceType type, GenericReader<?> source) {
-            return new GroupAudience(source.readList(FIELD, UUID.class), uuidRecipientAdapter);
+        public ChannelAudience create(AudienceType type, Configuration source) {
+            return new GroupAudience(source.getList(FIELD, UUID.class), uuidRecipientAdapter);
         }
     }
 }

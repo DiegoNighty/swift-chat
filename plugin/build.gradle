@@ -1,0 +1,40 @@
+plugins {
+    id("java")
+
+    alias(libs.plugins.plugin.yml)
+    alias(libs.plugins.shadow.jar)
+}
+
+bukkit {
+    name = findProperty("plugin.name")?.toString()
+    apiVersion = findProperty("plugin.apiVersion")?.toString()
+    main = findProperty("plugin.main")?.toString()
+    description = findProperty("plugin.description")?.toString()
+    authors = findProperty("plugin.authors")?.toString()?.split(",")
+}
+
+tasks {
+    shadowJar {
+        archiveBaseName.set(rootProject.name)
+        archiveClassifier.set("")
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
+}
+
+dependencies {
+    implementation(project(":core"))
+    implementation(project(":spigot"))
+
+    compileOnly(libs.spigot)
+
+    testImplementation(libs.junit.api)
+    testRuntimeOnly(libs.junit.engine)
+}
+
+test {
+    useJUnitPlatform()
+}

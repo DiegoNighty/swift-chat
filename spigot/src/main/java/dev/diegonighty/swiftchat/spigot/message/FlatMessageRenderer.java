@@ -1,8 +1,8 @@
 package dev.diegonighty.swiftchat.spigot.message;
 
-import dev.diegonighty.swiftchat.core.structure.message.MessageContext;
-import dev.diegonighty.swiftchat.core.structure.message.MessageRenderer;
-import dev.diegonighty.swiftchat.core.structure.recipient.ChannelRecipient;
+import dev.diegonighty.swiftchat.core.message.MessageContext;
+import dev.diegonighty.swiftchat.core.message.MessageRenderer;
+import dev.diegonighty.swiftchat.core.recipient.ChannelRecipient;
 import dev.diegonighty.swiftchat.spigot.StructureAdapter;
 
 public class FlatMessageRenderer implements MessageRenderer {

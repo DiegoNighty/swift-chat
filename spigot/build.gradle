@@ -1,24 +1,5 @@
 plugins {
     id("java")
-    id("net.minecrell.plugin-yml.bukkit") version("0.5.2")
-    id("com.github.johnrengelman.shadow") version("7.1.2")
-}
-
-var pluginName = findProperty("plugin.name")?.toString()
-
-bukkit {
-    name = pluginName
-    apiVersion = findProperty("plugin.apiVersion")?.toString()
-    main = "${rootProject.group}.${pluginName?.toLowerCase()}.spigot.${pluginName}Plugin"
-    description = findProperty("plugin.description")?.toString()
-    authors = findProperty("plugin.authors")?.toString()?.split(",")
-}
-
-tasks {
-    shadowJar {
-        archiveBaseName.set(rootProject.name)
-        archiveClassifier.set("")
-    }
 }
 
 repositories {
@@ -28,13 +9,12 @@ repositories {
 }
 
 dependencies {
+    compileOnly(libs.spigot)
+
+    testImplementation(libs.junit.api)
+    testRuntimeOnly(libs.junit.engine)
+
     implementation(project(":core"))
-    implementation(project(":mongo"))
-
-    compileOnly("org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT")
-
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 test {

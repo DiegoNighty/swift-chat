@@ -1,11 +1,10 @@
 package dev.diegonighty.swiftchat.spigot.storage;
 
-import dev.diegonighty.swiftchat.core.storage.StorageProvider;
-import dev.diegonighty.swiftchat.core.storage.channel.ChannelRepository;
-import dev.diegonighty.swiftchat.core.storage.configuration.Configuration;
-import dev.diegonighty.swiftchat.core.storage.configuration.ConfigurationFactory;
+import dev.diegonighty.swiftchat.core.configuration.Configuration;
+import dev.diegonighty.swiftchat.core.configuration.ConfigurationFactory;
+import dev.diegonighty.swiftchat.core.storage.ChannelRepository;
 
-public class SpigotStorageProvider implements StorageProvider {
+public class SpigotStorageProvider {
 
     private final Configuration configuration;
 
@@ -13,8 +12,7 @@ public class SpigotStorageProvider implements StorageProvider {
         this.configuration = configuration.createConfiguration("storage");
     }
 
-    @Override
-    public ChannelRepository createChannelRepository() {
+    public Repository<?> createChannelRepository() {
         //TODO implement
 
         return null;

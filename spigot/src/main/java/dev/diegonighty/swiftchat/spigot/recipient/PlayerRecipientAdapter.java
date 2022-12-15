@@ -1,8 +1,8 @@
 package dev.diegonighty.swiftchat.spigot.recipient;
 
 import dev.diegonighty.swiftchat.core.recipient.RecipientAdapter;
-import dev.diegonighty.swiftchat.core.structure.recipient.ChannelRecipient;
-import dev.diegonighty.swiftchat.core.structure.message.MessageRendererProvider;
+import dev.diegonighty.swiftchat.core.recipient.ChannelRecipient;
+import dev.diegonighty.swiftchat.core.message.MessageRendererProvider;
 import org.bukkit.entity.Player;
 
 public class PlayerRecipientAdapter implements RecipientAdapter {

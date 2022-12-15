@@ -1,25 +1,22 @@
 package dev.diegonighty.swiftchat.spigot;
 
 import dev.diegonighty.swiftchat.core.ChatPlatform;
+import dev.diegonighty.swiftchat.core.audience.AudienceAdapter;
+import dev.diegonighty.swiftchat.core.audience.SimpleAudienceAdapter;
 import dev.diegonighty.swiftchat.core.channel.ChannelFactory;
 import dev.diegonighty.swiftchat.core.channel.ChannelManager;
+import dev.diegonighty.swiftchat.core.decorator.chain.factory.DecoratorChainFactory;
+import dev.diegonighty.swiftchat.core.decorator.namespace.CachedDecoratorNamespace;
+import dev.diegonighty.swiftchat.core.decorator.namespace.DecoratorNamespace;
+import dev.diegonighty.swiftchat.core.decorator.sequence.DecoratorChainSequence;
+import dev.diegonighty.swiftchat.core.decorator.sequence.MarkedDecoratorSequence;
 import dev.diegonighty.swiftchat.core.error.platform.PlatformAlreadyEnabledError;
+import dev.diegonighty.swiftchat.core.message.MessageRendererProvider;
 import dev.diegonighty.swiftchat.core.recipient.RecipientAdapter;
-import dev.diegonighty.swiftchat.core.storage.StorageProvider;
-import dev.diegonighty.swiftchat.core.storage.channel.ChannelRepository;
-import dev.diegonighty.swiftchat.core.structure.audience.AudienceAdapter;
-import dev.diegonighty.swiftchat.core.structure.audience.SimpleAudienceAdapter;
-import dev.diegonighty.swiftchat.core.structure.decorator.chain.factory.DecoratorChainFactory;
-import dev.diegonighty.swiftchat.core.structure.decorator.namespace.CachedDecoratorNamespace;
-import dev.diegonighty.swiftchat.core.structure.decorator.namespace.DecoratorNamespace;
-import dev.diegonighty.swiftchat.core.structure.decorator.sequence.DecoratorChainSequence;
-import dev.diegonighty.swiftchat.core.structure.decorator.sequence.MarkedDecoratorSequence;
-import dev.diegonighty.swiftchat.core.structure.message.MessageRendererProvider;
+import dev.diegonighty.swiftchat.core.storage.ChannelRepository;
 import dev.diegonighty.swiftchat.spigot.channel.CachedChannelManager;
 import dev.diegonighty.swiftchat.spigot.message.FlatMessageRenderer;
 import dev.diegonighty.swiftchat.spigot.recipient.PlayerRecipientAdapter;
-import dev.diegonighty.swiftchat.spigot.storage.SpigotConfigurationFactory;
-import dev.diegonighty.swiftchat.spigot.storage.SpigotStorageProvider;
 
 public class SpigotChatPlatform implements ChatPlatform {
 
@@ -35,7 +32,6 @@ public class SpigotChatPlatform implements ChatPlatform {
 
     @Override
     public void enable() throws PlatformAlreadyEnabledError {
-        StorageProvider storageProvider = new SpigotStorageProvider(new SpigotConfigurationFactory());
         DecoratorChainSequence decoratorChainSequence = new MarkedDecoratorSequence();
 
         this.decoratorNamespace = new CachedDecoratorNamespace();

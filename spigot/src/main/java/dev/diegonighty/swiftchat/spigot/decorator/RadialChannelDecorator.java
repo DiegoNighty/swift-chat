@@ -1,8 +1,8 @@
 package dev.diegonighty.swiftchat.spigot.decorator;
 
-import dev.diegonighty.swiftchat.core.structure.decorator.ChannelDecorator;
-import dev.diegonighty.swiftchat.core.structure.decorator.DecoratorPriority;
-import dev.diegonighty.swiftchat.core.structure.decorator.chain.ChannelDecoratorChain;
+import dev.diegonighty.swiftchat.core.decorator.ChannelDecorator;
+import dev.diegonighty.swiftchat.core.decorator.DecoratorPriority;
+import dev.diegonighty.swiftchat.core.decorator.chain.ChannelDecoratorChain;
 import dev.diegonighty.swiftchat.spigot.StructureAdapter;
 
 public class RadialChannelDecorator implements ChannelDecorator {

@@ -1,10 +1,10 @@
 package dev.diegonighty.swiftchat.spigot;
 
 import dev.diegonighty.swiftchat.core.SwiftChatPlatformAccessor;
-import dev.diegonighty.swiftchat.core.structure.channel.Channel;
-import dev.diegonighty.swiftchat.core.structure.message.Message;
-import dev.diegonighty.swiftchat.core.structure.message.MessageContext;
-import dev.diegonighty.swiftchat.core.structure.recipient.ChannelRecipient;
+import dev.diegonighty.swiftchat.core.channel.structure.Channel;
+import dev.diegonighty.swiftchat.core.message.Message;
+import dev.diegonighty.swiftchat.core.message.MessageContext;
+import dev.diegonighty.swiftchat.core.recipient.ChannelRecipient;
 import dev.diegonighty.swiftchat.spigot.message.SimpleMessageContext;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

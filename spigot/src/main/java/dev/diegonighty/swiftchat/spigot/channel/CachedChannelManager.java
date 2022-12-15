@@ -4,7 +4,7 @@ import dev.diegonighty.swiftchat.core.channel.ChannelFactory;
 import dev.diegonighty.swiftchat.core.channel.ChannelHolder;
 import dev.diegonighty.swiftchat.core.channel.ChannelManager;
 import dev.diegonighty.swiftchat.core.storage.channel.ChannelRepository;
-import dev.diegonighty.swiftchat.core.structure.channel.Channel;
+import dev.diegonighty.swiftchat.core.channel.structure.Channel;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,0 +1,34 @@
+plugins {
+    id("java")
+    alias(libs.plugins.plugin.yml)
+    alias(libs.plugins.shadow.jar)
+}
+
+allprojects {
+    plugins.apply("java")
+    plugins.apply(libs.plugins.shadow.jar.get().pluginId)
+
+    repositories {
+        mavenCentral()
+        maven { url("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
+    }
+
+    dependencies {
+        implementation(libs.kyori.api)
+        implementation(libs.kyori.plain)
+
+        testImplementation(libs.junit.api)
+        testRuntimeOnly(libs.junit.engine)
+    }
+
+    tasks {
+        shadowJar {
+            archiveBaseName.set(rootProject.name)
+            archiveClassifier.set("")
+        }
+
+        test {
+            useJUnitPlatform()
+        }
+    }
+}

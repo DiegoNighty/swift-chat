@@ -1,7 +1,7 @@
 package dev.diegonighty.swiftchat.spigot.recipient;
 
 import dev.diegonighty.swiftchat.core.recipient.RecipientAdapter;
-import dev.diegonighty.swiftchat.core.structure.recipient.ChannelRecipient;
+import dev.diegonighty.swiftchat.core.recipient.ChannelRecipient;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;

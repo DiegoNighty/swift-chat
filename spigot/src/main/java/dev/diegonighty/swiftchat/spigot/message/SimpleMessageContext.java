@@ -1,10 +1,10 @@
 package dev.diegonighty.swiftchat.spigot.message;
 
 import dev.diegonighty.swiftchat.core.common.Metadata;
-import dev.diegonighty.swiftchat.core.structure.channel.Channel;
-import dev.diegonighty.swiftchat.core.structure.channel.ChannelInformation;
-import dev.diegonighty.swiftchat.core.structure.message.Message;
-import dev.diegonighty.swiftchat.core.structure.message.MessageContext;
+import dev.diegonighty.swiftchat.core.channel.structure.Channel;
+import dev.diegonighty.swiftchat.core.channel.structure.ChannelInformation;
+import dev.diegonighty.swiftchat.core.message.Message;
+import dev.diegonighty.swiftchat.core.message.MessageContext;
 
 public class SimpleMessageContext implements MessageContext {
 
