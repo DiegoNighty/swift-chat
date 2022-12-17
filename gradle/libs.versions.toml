@@ -8,6 +8,9 @@ shadow-jar = "7.1.2"
 
 kyori = "4.12.0"
 
+caffeine = "3.1.2"
+jedis = "4.3.0"
+
 [libraries]
 spigot = { group = "org.spigotmc", name = "spigot-api", version.ref = "spigot" }
 
@@ -20,6 +23,9 @@ configurate-yaml = { group = "org.spongepowered", name = "configurate-yaml", ver
 kyori-api = { group = "net.kyori", name = "adventure-api", version.ref = "kyori" }
 kyori-minimessage = { group = "net.kyori", name = "adventure-text-minimessage", version.ref = "kyori" }
 kyori-plain = { group = "net.kyori", name = "adventure-text-serializer-plain", version.ref = "kyori" }
+
+caffeine = { group = "com.github.ben-manes.caffeine", name = "caffeine", version.ref = "caffeine" }
+jedis = { group = "redis.clients", name = "jedis", version.ref = "jedis" }
 
 [plugins]
 plugin-yml = { id = "net.minecrell.plugin-yml.bukkit", version.ref = "plugin-yml" }

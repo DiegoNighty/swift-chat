@@ -47,7 +47,7 @@ public record MockedChannel(ChannelSpec spec, DecoratorChainSequence sequence) i
                 decorator.decorate(copiedContext, recipient);
             }
 
-            recipient.sendMessage(copiedContext.message());
+            recipient.sendMessage(copiedContext.editableMessage());
         }
     }
 

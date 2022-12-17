@@ -28,8 +28,8 @@ public interface ChannelSpec {
     Metadata metadata();
 
     /**
-     * The decorator chain of the channel.
-     * @return the decorator chain of the channel.
+     * The audience of the channel.
+     * @return the audience of the channel.
      */
     List<ChannelRecipient> audience();
 

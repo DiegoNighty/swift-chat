@@ -17,7 +17,7 @@ public interface ChatPlatform {
      * Gets the decorator namespace.
      * @return the decorator namespace
      */
-    DecoratorNamespace decorators();
+    DecoratorNamespace decoratorNamespace();
 
 
 }
