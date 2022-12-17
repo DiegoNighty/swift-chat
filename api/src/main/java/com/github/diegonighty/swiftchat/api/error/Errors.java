@@ -22,4 +22,18 @@ public class Errors {
         return object == null ? fallback : object;
     }
 
+    public static <T, E extends RuntimeException> T trySupply(
+            ExceptionableSupplier<T, ?> supplier, Supplier<E> error
+    ) {
+        try {
+            return supplier.get();
+        } catch (Exception e) {
+            throw error.get();
+        }
+    }
+
+    public interface ExceptionableSupplier<T, E extends RuntimeException> {
+        T get() throws E;
+    }
+
 }

@@ -44,7 +44,7 @@ public record DefaultChannel(
                 decorator.decorate(copiedContext, recipient);
             }
 
-            recipient.sendMessage(copiedContext.message());
+            recipient.sendMessage(copiedContext.editableMessage());
         }
     }
 

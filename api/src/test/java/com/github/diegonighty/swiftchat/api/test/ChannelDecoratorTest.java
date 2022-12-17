@@ -63,13 +63,13 @@ public class ChannelDecoratorTest {
             private Component message = Component.text("Hello world!");
 
             @Override
-            public Component message() {
+            public Component editableMessage() {
                 return message;
             }
 
             @Override
-            public void modifyMessage(Component message) {
-                this.message = message;
+            public void editMessage(EditableComponent component) {
+                message = component.edit(message);
             }
 
             @Override
@@ -135,12 +135,13 @@ public class ChannelDecoratorTest {
                         .decorate((ctx) -> {
                             System.out.println("aaa");
 
-                            ctx.message(
-                                    ctx.message()
-                                            .replaceText(builder -> builder
-                                                    .match("Hello")
-                                                    .replacement("Hi")
-                                            )
+                            ctx.editMessage(
+                                    (component) ->
+                                            component.replaceText(
+                                                    builder ->
+                                                            builder.match("Hello")
+                                                                    .replacement(Component.text("Hello world!"))
+                                    )
                             );
                         });
             }
