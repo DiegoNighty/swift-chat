@@ -8,19 +8,25 @@ public interface MessageContext {
 
     ChannelSpec channel();
 
-    Component editableMessage();
-
-    void editMessage(EditableComponent component);
-
-    Component originalMessage();
+    Message message();
 
     Metadata metadata();
 
     MessageContext copy();
 
-    @FunctionalInterface
-    interface EditableComponent {
-        Component edit(Component component);
+    interface Message {
+
+        Component content();
+
+        Component originalContent();
+
+        void edit(ComponentEditor component);
+
+        @FunctionalInterface
+        interface ComponentEditor {
+            Component edit(Component component);
+        }
+
     }
 
 }
