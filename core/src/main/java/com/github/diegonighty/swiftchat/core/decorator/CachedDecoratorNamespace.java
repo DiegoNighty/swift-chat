@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class CachedDecoratorNamespace implements DecoratorNamespace {
 
-    private final static String CHANNEL_NAMESPACE = "channel";
     private final Map<String, ChannelDecorator> decorators = new HashMap<>();
 
     @Override
