@@ -1,11 +1,9 @@
 package com.github.diegonighty.swiftchat.api.decorator;
 
-import net.kyori.adventure.key.Namespaced;
-
 import java.util.List;
 import java.util.Objects;
 
-public interface DecoratorNamespace extends Namespaced {
+public interface DecoratorNamespace {
 
     default ChannelDecorator using(Class<? extends ChannelDecorator> decorator) {
         return using(decorator.getSimpleName());
