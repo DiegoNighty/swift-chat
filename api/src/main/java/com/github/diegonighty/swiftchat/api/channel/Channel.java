@@ -1,9 +1,8 @@
 package com.github.diegonighty.swiftchat.api.channel;
 
 import com.github.diegonighty.swiftchat.api.message.MessageContext;
-import net.kyori.adventure.key.Keyed;
 
-public interface Channel extends Keyed {
+public interface Channel  {
 
     /**
      * Gets the channel specifications

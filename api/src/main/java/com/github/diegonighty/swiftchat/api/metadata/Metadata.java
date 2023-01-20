@@ -1,4 +1,4 @@
-package com.github.diegonighty.swiftchat.api.structure;
+package com.github.diegonighty.swiftchat.api.metadata;
 
 import java.util.HashMap;
 import java.util.Map;

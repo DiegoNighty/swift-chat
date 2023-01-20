@@ -1,22 +1,17 @@
 package com.github.diegonighty.swiftchat.core.channel;
 
-import com.github.diegonighty.swiftchat.api.ChatPlatform;
 import com.github.diegonighty.swiftchat.api.channel.Channel;
 import com.github.diegonighty.swiftchat.api.channel.ChannelSpec;
 import com.github.diegonighty.swiftchat.api.decorator.DecoratorConverter;
 import com.github.diegonighty.swiftchat.api.decorator.chain.DecoratorChainProvider;
 import com.github.diegonighty.swiftchat.api.decorator.chain.DecoratorChainSequence;
 import com.github.diegonighty.swiftchat.api.message.MessageContext;
-import net.kyori.adventure.key.Key;
-import org.jetbrains.annotations.NotNull;
 
 public record DefaultChannel(
     ChannelSpec spec,
     DecoratorChainSequence sequence,
     DecoratorConverter converter
 ) implements Channel {
-
-    private static final Key KEY = Key.key(ChatPlatform.NAMESPACE, "default");
 
     @Override
     public void postMessage(MessageContext context) {
@@ -41,7 +36,7 @@ public record DefaultChannel(
             }
 
             if (chain.personals().isEmpty()) {
-                recipient.sendMessage(context.editableMessage());
+                recipient.asAudience().sendMessage(context.message().content());
                 continue;
             }
 
@@ -51,12 +46,8 @@ public record DefaultChannel(
                 decorator.decorate(copiedContext, recipient);
             }
 
-            recipient.sendMessage(copiedContext.editableMessage());
+            recipient.asAudience().sendMessage(copiedContext.message().content());
         }
     }
 
-    @Override
-    public @NotNull Key key() {
-        return KEY;
-    }
 }

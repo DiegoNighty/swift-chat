@@ -3,11 +3,10 @@ package com.github.diegonighty.swiftchat.api.audience;
 import com.github.diegonighty.swiftchat.api.channel.Channel;
 import com.github.diegonighty.swiftchat.api.server.ServerInfo;
 import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.key.Key;
 
 import java.util.UUID;
 
-public interface ChannelRecipient extends Audience {
+public interface ChannelRecipient {
 
     /**
      * Returns the unique identifier of this recipient.
@@ -25,7 +24,7 @@ public interface ChannelRecipient extends Audience {
      * Returns the key of the selected channel
      * @return the key of the selected channel
      */
-    Key selectedChannel();
+    String selectedChannel();
 
     /**
      * Selects the channel
@@ -38,5 +37,11 @@ public interface ChannelRecipient extends Audience {
      * @return the server this recipient is connected to.
      */
     ServerInfo currentServer();
+
+    /**
+     * Returns the audience of this recipient.
+     * @return the audience of this recipient.
+     */
+    Audience asAudience();
 
 }

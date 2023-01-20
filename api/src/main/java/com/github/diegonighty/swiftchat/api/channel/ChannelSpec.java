@@ -3,7 +3,7 @@ package com.github.diegonighty.swiftchat.api.channel;
 import com.github.diegonighty.swiftchat.api.audience.ChannelRecipient;
 import com.github.diegonighty.swiftchat.api.decorator.DecoratorConverter;
 import com.github.diegonighty.swiftchat.api.decorator.chain.ChannelDecoratorChain;
-import com.github.diegonighty.swiftchat.api.structure.Metadata;
+import com.github.diegonighty.swiftchat.api.metadata.Metadata;
 import net.kyori.adventure.text.Component;
 
 import java.util.List;
