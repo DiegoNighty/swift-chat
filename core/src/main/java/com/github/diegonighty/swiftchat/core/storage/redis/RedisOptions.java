@@ -10,12 +10,14 @@ public record RedisOptions(
         Gson gson
 ) {
 
+    public static final int NO_EXPIRATION = -1;
+
     public static RedisOptions with(String table, Gson gson, Duration expiration) {
         return new RedisOptions(table, expiration.toSeconds(), gson);
     }
 
     public static RedisOptions with(String table, Gson gson) {
-        return new RedisOptions(table, -1, gson);
+        return new RedisOptions(table, NO_EXPIRATION, gson);
     }
 
 }

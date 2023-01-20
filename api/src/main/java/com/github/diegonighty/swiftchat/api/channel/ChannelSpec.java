@@ -1,6 +1,7 @@
 package com.github.diegonighty.swiftchat.api.channel;
 
 import com.github.diegonighty.swiftchat.api.audience.ChannelRecipient;
+import com.github.diegonighty.swiftchat.api.decorator.DecoratorConverter;
 import com.github.diegonighty.swiftchat.api.decorator.chain.ChannelDecoratorChain;
 import com.github.diegonighty.swiftchat.api.structure.Metadata;
 import net.kyori.adventure.text.Component;
@@ -35,8 +36,15 @@ public interface ChannelSpec {
 
     /**
      * The decorator chain of the channel.
+     * @param converter the converter to convert the keys to decorators.
      * @return the decorator chain of the channel.
      */
-    ChannelDecoratorChain decorators();
+    ChannelDecoratorChain chain(DecoratorConverter converter);
+
+    /**
+     * The decorator keys of the channel.
+     * @return the decorator keys of the channel.
+     */
+    List<String> decoratorKeys();
 
 }

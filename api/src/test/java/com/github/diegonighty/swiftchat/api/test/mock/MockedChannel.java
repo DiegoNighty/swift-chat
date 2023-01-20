@@ -3,6 +3,7 @@ package com.github.diegonighty.swiftchat.api.test.mock;
 import com.github.diegonighty.swiftchat.api.audience.ChannelRecipient;
 import com.github.diegonighty.swiftchat.api.channel.Channel;
 import com.github.diegonighty.swiftchat.api.channel.ChannelSpec;
+import com.github.diegonighty.swiftchat.api.decorator.DecoratorConverter;
 import com.github.diegonighty.swiftchat.api.decorator.chain.ChannelDecoratorChain;
 import com.github.diegonighty.swiftchat.api.decorator.chain.DecoratorChainSequence;
 import com.github.diegonighty.swiftchat.api.message.MessageContext;
@@ -21,7 +22,7 @@ public record MockedChannel(ChannelSpec spec, DecoratorChainSequence sequence) i
 
     @Override
     public void postMessage(MessageContext context) {
-        ChannelDecoratorChain chain = spec.decorators();
+        ChannelDecoratorChain chain = spec.chain(null);
 
         for (var decorator : chain.globals(sequence)) {
             decorator.decorate(context);
@@ -38,6 +39,11 @@ public record MockedChannel(ChannelSpec spec, DecoratorChainSequence sequence) i
             }
 
             if (!permitted) {
+                continue;
+            }
+
+            if (chain.personals().isEmpty()) {
+                recipient.sendMessage(context.editableMessage());
                 continue;
             }
 
@@ -71,6 +77,16 @@ public record MockedChannel(ChannelSpec spec, DecoratorChainSequence sequence) i
         @Override
         public List<ChannelRecipient> audience() {
             return List.of(new MockedRecipient());
+        }
+
+        @Override
+        public ChannelDecoratorChain chain(DecoratorConverter converter) {
+            return decorators;
+        }
+
+        @Override
+        public List<String> decoratorKeys() {
+            return List.of();
         }
     }
 

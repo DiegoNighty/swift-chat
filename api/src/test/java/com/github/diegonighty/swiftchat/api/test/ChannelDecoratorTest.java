@@ -114,6 +114,14 @@ public class ChannelDecoratorTest {
         }
 
         @Override
+        public ChannelDecoratorChain remove(com.github.diegonighty.swiftchat.api.decorator.type.Decorator decorator) {
+            permitDecorators.removeIf(composedDecorator -> composedDecorator.decorator().equals(decorator));
+            globalDecorators.removeIf(composedDecorator -> composedDecorator.decorator().equals(decorator));
+            personalDecorators.removeIf(composedDecorator -> composedDecorator.decorator().equals(decorator));
+            return this;
+        }
+
+        @Override
         public Iterable<PermitDecorator> permits(DecoratorChainSequence sequence) {
             return sequence.orderPermits(permitDecorators);
         }
@@ -126,6 +134,15 @@ public class ChannelDecoratorTest {
         @Override
         public Iterable<PersonalDecorator> personals(DecoratorChainSequence sequence) {
             return sequence.orderPersonals(personalDecorators);
+        }
+
+        @Override
+        public List<ComposedDecorator> all() {
+            return new ArrayList<>() {{
+                addAll(permitDecorators);
+                addAll(globalDecorators);
+                addAll(personalDecorators);
+            }};
         }
 
         static class Decorator implements ChannelDecorator {

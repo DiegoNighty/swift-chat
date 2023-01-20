@@ -4,6 +4,7 @@ import com.github.diegonighty.swiftchat.api.decorator.ComposedDecorator;
 import com.github.diegonighty.swiftchat.api.decorator.DecoratorPriority;
 import com.github.diegonighty.swiftchat.api.decorator.chain.ChannelDecoratorChain;
 import com.github.diegonighty.swiftchat.api.decorator.chain.DecoratorChainSequence;
+import com.github.diegonighty.swiftchat.api.decorator.type.Decorator;
 import com.github.diegonighty.swiftchat.api.decorator.type.GlobalDecorator;
 import com.github.diegonighty.swiftchat.api.decorator.type.PermitDecorator;
 import com.github.diegonighty.swiftchat.api.decorator.type.PersonalDecorator;
@@ -36,6 +37,14 @@ public class ChannelDecoratorChainImpl implements ChannelDecoratorChain {
     }
 
     @Override
+    public ChannelDecoratorChain remove(Decorator decorator) {
+        permitDecorators.removeIf(composedDecorator -> composedDecorator.decorator().equals(decorator));
+        globalDecorators.removeIf(composedDecorator -> composedDecorator.decorator().equals(decorator));
+        personalDecorators.removeIf(composedDecorator -> composedDecorator.decorator().equals(decorator));
+        return this;
+    }
+
+    @Override
     public Iterable<PermitDecorator> permits(DecoratorChainSequence sequence) {
         return sequence.orderPermits(permitDecorators);
     }
@@ -49,4 +58,30 @@ public class ChannelDecoratorChainImpl implements ChannelDecoratorChain {
     public Iterable<PersonalDecorator> personals(DecoratorChainSequence sequence) {
         return sequence.orderPersonals(personalDecorators);
     }
+
+    @Override
+    public List<ComposedDecorator> all() {
+        return new ArrayList<>() {{
+            addAll(permitDecorators);
+            addAll(globalDecorators);
+            addAll(personalDecorators);
+        }};
+    }
+
+    @Override
+    public List<ComposedDecorator> permits() {
+        return permitDecorators;
+    }
+
+    @Override
+    public List<ComposedDecorator> globals() {
+        return globalDecorators;
+    }
+
+    @Override
+    public List<ComposedDecorator> personals() {
+        return personalDecorators;
+    }
+
+
 }

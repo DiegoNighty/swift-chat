@@ -3,7 +3,8 @@ package com.github.diegonighty.swiftchat.core.channel;
 import com.github.diegonighty.swiftchat.api.ChatPlatform;
 import com.github.diegonighty.swiftchat.api.channel.Channel;
 import com.github.diegonighty.swiftchat.api.channel.ChannelSpec;
-import com.github.diegonighty.swiftchat.api.decorator.chain.ChannelDecoratorChain;
+import com.github.diegonighty.swiftchat.api.decorator.DecoratorConverter;
+import com.github.diegonighty.swiftchat.api.decorator.chain.DecoratorChainProvider;
 import com.github.diegonighty.swiftchat.api.decorator.chain.DecoratorChainSequence;
 import com.github.diegonighty.swiftchat.api.message.MessageContext;
 import net.kyori.adventure.key.Key;
@@ -11,14 +12,15 @@ import org.jetbrains.annotations.NotNull;
 
 public record DefaultChannel(
     ChannelSpec spec,
-    DecoratorChainSequence sequence
+    DecoratorChainSequence sequence,
+    DecoratorConverter converter
 ) implements Channel {
 
     private static final Key KEY = Key.key(ChatPlatform.NAMESPACE, "default");
 
     @Override
     public void postMessage(MessageContext context) {
-        ChannelDecoratorChain chain = spec.decorators();
+        DecoratorChainProvider chain = spec.chain(converter);
 
         for (var decorator : chain.globals(sequence)) {
             decorator.decorate(context);
@@ -35,6 +37,11 @@ public record DefaultChannel(
             }
 
             if (!permitted) {
+                continue;
+            }
+
+            if (chain.personals().isEmpty()) {
+                recipient.sendMessage(context.editableMessage());
                 continue;
             }
 

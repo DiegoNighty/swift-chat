@@ -1,6 +1,7 @@
 package com.github.diegonighty.swiftchat.api.decorator.chain;
 
 import com.github.diegonighty.swiftchat.api.decorator.DecoratorPriority;
+import com.github.diegonighty.swiftchat.api.decorator.type.Decorator;
 import com.github.diegonighty.swiftchat.api.decorator.type.GlobalDecorator;
 import com.github.diegonighty.swiftchat.api.decorator.type.PermitDecorator;
 import com.github.diegonighty.swiftchat.api.decorator.type.PersonalDecorator;
@@ -25,4 +26,5 @@ public interface ChannelDecoratorChain extends DecoratorChainProvider {
         return permit(decorator, DecoratorPriority.NORMAL);
     }
 
+    ChannelDecoratorChain remove(Decorator decorator);
 }

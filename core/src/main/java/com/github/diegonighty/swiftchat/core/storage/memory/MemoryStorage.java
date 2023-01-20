@@ -4,12 +4,22 @@ import com.github.diegonighty.swiftchat.core.storage.Storage;
 
 import java.util.Map;
 
-public abstract class MemoryStorage<I, E> implements Storage<I, E> {
+public class MemoryStorage<I, E> implements Storage<I, E> {
 
     private final Map<I, E> storage;
+    private final IDExtractor<E, I> extractor;
 
-    protected MemoryStorage(Map<I, E> storage) {
+    protected MemoryStorage(
+            Map<I, E> storage,
+            IDExtractor<E, I> extractor
+    ) {
         this.storage = storage;
+        this.extractor = extractor;
+    }
+
+    @Override
+    public IDExtractor<E, I> extract() {
+        return extractor;
     }
 
     @Override
@@ -19,11 +29,11 @@ public abstract class MemoryStorage<I, E> implements Storage<I, E> {
 
     @Override
     public void update(E entity) {
-        storage.put(extractId(entity), entity);
+        storage.put(extract().from(entity), entity);
     }
 
     @Override
     public void delete(E entity) {
-        storage.remove(extractId(entity));
+        storage.remove(extract().from(entity));
     }
 }

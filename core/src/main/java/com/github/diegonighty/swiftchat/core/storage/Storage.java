@@ -1,12 +1,15 @@
 package com.github.diegonighty.swiftchat.core.storage;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Optional;
 import java.util.function.Consumer;
 
 public interface Storage<I, E> {
 
-    I extractId(E entity);
+    IDExtractor<E, I> extract();
 
+    @Nullable
     E read(I id);
 
     void update(E entity);
@@ -14,10 +17,14 @@ public interface Storage<I, E> {
     void delete(E entity);
 
     default void handle(I id, Consumer<E> action) {
-        Optional.of(read(id))
+        Optional.ofNullable(read(id))
                 .ifPresent(action
                         .andThen(this::update)
                 );
+    }
+
+    interface IDExtractor<E, I> {
+            I from(E entity);
     }
 
 }

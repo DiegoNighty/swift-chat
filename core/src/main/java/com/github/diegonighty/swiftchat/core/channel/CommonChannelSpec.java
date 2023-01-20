@@ -2,6 +2,7 @@ package com.github.diegonighty.swiftchat.core.channel;
 
 import com.github.diegonighty.swiftchat.api.audience.ChannelRecipient;
 import com.github.diegonighty.swiftchat.api.channel.ChannelSpec;
+import com.github.diegonighty.swiftchat.api.decorator.DecoratorConverter;
 import com.github.diegonighty.swiftchat.api.decorator.chain.ChannelDecoratorChain;
 import com.github.diegonighty.swiftchat.api.structure.Metadata;
 import net.kyori.adventure.text.Component;
@@ -13,5 +14,12 @@ public record CommonChannelSpec(
         Component name,
         Metadata metadata,
         List<ChannelRecipient> audience,
-        ChannelDecoratorChain decorators
-) implements ChannelSpec {}
+        List<String> decoratorKeys
+) implements ChannelSpec {
+
+    @Override
+    public ChannelDecoratorChain chain(DecoratorConverter converter) {
+        return converter.buildChain(this);
+    }
+
+}
